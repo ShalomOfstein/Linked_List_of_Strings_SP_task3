@@ -14,7 +14,7 @@ libStrList.a: StrList.o
 	$(AR) -rcs libStrList.a StrList.o
 
 #compile main file
-main.o: main.c StrList.h
+main.o: Main.c StrList.h
 	$(CC) $(FLAG) -c Main.c -o main.o
 
 #compile object file
