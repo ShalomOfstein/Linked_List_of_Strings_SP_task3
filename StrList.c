@@ -274,12 +274,12 @@ int StrList_isEqual(const StrList* StrList1, const StrList* StrList2){
  * Clones the given StrList. 
  * It's the user responsibility to free it with StrList_free.
  */
-StrList* StrList_clone(const StrList* StrList1){
-    StrList* newStrList = StrList_alloc();
+StrList* StrList_clone(const StrList* StrList){
+    struct _StrList* newStrList = StrList_alloc();
     if(newStrList==NULL){
         return NULL;
     }
-    StrListNode* originalListNode = StrList1->_head;
+    StrListNode* originalListNode = StrList->_head;
     while(originalListNode!=NULL){
         StrList_insertLast(newStrList, originalListNode->_data);
         originalListNode= originalListNode->_next;

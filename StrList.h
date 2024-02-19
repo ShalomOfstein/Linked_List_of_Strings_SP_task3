@@ -93,7 +93,7 @@ int StrList_isEqual(const StrList* StrList1, const StrList* StrList2);
  * Clones the given StrList. 
  * It's the user responsibility to free it with StrList_free.
  */
-StrList* StrList_clone(const StrList* StrList1);
+StrList* StrList_clone(const StrList* StrList);
 
 /*
  * Reverces the given StrList. 
