@@ -23,6 +23,7 @@ StrListNode* StrListNode_alloc(const char* data, StrListNode* next) {
 }
 
 void StrListNode_free(StrListNode* node) {
+    free(node->_data);
     free(node);
 }
 
@@ -105,16 +106,19 @@ void StrList_insertAt(StrList* StrList,
 	const char* data,int index){
     // if the index is out of bounds then do nothing
     if (index < 0 || index > StrList->_size) {
+        printf("Error: Index out of bounds\n");
         return;
     }
     // allocate a new node
     StrListNode* newNode= StrListNode_alloc(data,NULL);
     // if there is no new memory to allocate
     if(newNode==NULL){
+        printf("Error: Memory allocation failed\n");
         return;
     }// if the list is empty then the new node is the head
     if (StrList->_head==NULL) {
         StrList->_head= newNode;
+        printf("The list is empty, word added to head\n");
     }
     else {
         // find the node before the index
@@ -206,8 +210,6 @@ void StrList_remove(StrList* StrList, const char* data){
             
             StrListNode_free(p);
             StrList->_size--;
-            free(p->_data);
-            free(p);
             p=q->_next;
         }
         else{
@@ -230,8 +232,8 @@ void StrList_removeAt(StrList* StrList, int index){
     if(index==0){
         StrList->_head = p->_next;
         StrListNode_free(p);
-        free(p->_data);
-        free(p);
+        
+        
         StrList->_size--;
     }
     else{
@@ -242,9 +244,9 @@ void StrList_removeAt(StrList* StrList, int index){
         
         p = p->_next;
         q->_next = p->_next;
+        
         StrListNode_free(p);
-        free(p->_data);
-        free(p);
+        
         StrList->_size--;
     }
 }
