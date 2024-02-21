@@ -89,7 +89,7 @@ mode 0 = exit
       // mode 4
       else if(mode == 4){
          int size = StrList_size(list);
-         printf("%d",size);
+         printf("%d\n",size);
       }
       // mode 5
       // Todo: make sure it works
@@ -100,14 +100,14 @@ mode 0 = exit
       }
       // mode 6
       else if(mode == 6){
-         printf("%d" ,StrList_printLen(list)); 
+         printf("%d\n" ,StrList_printLen(list)); 
       }
       // mode 7
       else if(mode == 7){
          getchar();
          char* word= inputWord(); // do i need to clear the char?
          int count = StrList_count(list,word);
-         printf("%d",count);
+         printf("%d\n",count);
       }
       // mode 8
       else if(mode == 8){
@@ -136,10 +136,10 @@ mode 0 = exit
       // mode 13
       else if(mode == 13){
          if(StrList_isSorted(list)==1){
-            printf("True");
+            printf("true\n");
          }
          else
-         printf("False"); 
+         printf("false\n"); 
       }   
       // if the mode is 0 exit the loop
    }
