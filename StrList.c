@@ -233,22 +233,18 @@ void StrList_removeAt(StrList* StrList, int index){
     if(index==0){
         StrList->_head = p->_next;
         StrListNode_free(p);
-        
-        
         StrList->_size--;
     }
     else{
-        for(int i =0; i<index -1;i++){
+        for(int i =0; i<index;i++){
             q=p;
             p = p->_next; 
         }
-        
-        p = p->_next;
-        q->_next = p->_next;
-        
-        StrListNode_free(p);
-        
-        StrList->_size--;
+        if (p != NULL) {
+            q->_next = p->_next;
+            StrListNode_free(p);
+            StrList->_size--;
+        }
     }
 }
 
