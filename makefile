@@ -6,12 +6,12 @@ FLAG = -Wall -g -fPIC
 all: StrList
 
 #compile program
-StrList: main.o libStrList.a
-	$(CC) $(FLAG) -o StrList main.o libStrList.a
+StrList: main.o StrList.o
+	$(CC) $(FLAG) -o StrList StrList.o main.o
 
-#compile library
-libStrList.a: StrList.o
-	$(AR) -rcs libStrList.a StrList.o
+# #compile library
+# libStrList.a: StrList.o
+# 	$(AR) -rcs libStrList.a StrList.o
 
 #compile main file
 main.o: Main.c StrList.h

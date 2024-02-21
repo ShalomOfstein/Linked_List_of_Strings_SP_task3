@@ -1,13 +1,22 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "StrList.h"
 
 
 
 char* inputWord(){
-   char* word = (char*)malloc(100*sizeof(char));
-   scanf("%s",word);
-   return word;
+   char* word = (char*)malloc(sizeof(char));
+   *word = '\0';
+   char c = getchar();
+   while(c!=' '&&c!='\n'&&c!=EOF){
+      int len = strlen(word);
+      word = (char*)realloc(word,len+2);
+      word[len] = c;
+      word[len+1] = '\0';
+      c = getchar();
+   }
+   return word;  
 }
 
 
@@ -23,12 +32,17 @@ char* inputWord(){
    while(mode!=0){
       scanf("%d",&mode);
       if (mode == 1){
-         if(StrList_size(list) > 0){
-            StrList_free(list); // what happens to the pointer list? 
+         printf("mode is 1");
+         printf("Enter the number of words to add: ");
+         int numOfWords = -1;
+         scanf("%d",&numOfWords);
+         getchar();
+         printf("Enter the words: ");
+         for(int i=0; i<numOfWords; i++){
+            char* word = inputWord();
+            StrList_insertLast(list,word);
+            printf("%s was added \n",word);
          }
-         list = StrList_alloc();
-         
-         // list = inputList(&list);
       }
       else if(mode == 2){
          int index = -1;
@@ -50,7 +64,7 @@ char* inputWord(){
          StrList_printAt(list,index);
       }
       else if(mode == 6){
-         StrList_printLen(list);
+         StrList_printLen(list); // doesnt do enything
       }
       else if(mode == 7){
          char* word=0;
@@ -75,12 +89,14 @@ char* inputWord(){
          StrList_free(list);
       }
       else if(mode == 12){
-         StrList_sort(list);
+         StrList_sort(list); /// segmenation fault core dumped
       }
       else if(mode == 13){
          printf("%d",StrList_isSorted(list)); 
       }   
-
+      
    }
-
+   
+   StrList_free(list);
+   
 }
