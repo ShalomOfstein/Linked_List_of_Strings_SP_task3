@@ -55,8 +55,14 @@ mode 0 = exit
    while(mode!=0){
       // get the mode
       scanf("%d",&mode);
+      
+      if (mode<-1 || mode>13){
+         StrList_free(list);
+         break;
+      }
 
-      // mode 1
+      // mode 1 
+   
       if (mode == 1){
          
          int numOfWords = -1;
@@ -68,9 +74,10 @@ mode 0 = exit
          }
       }
       // mode 2
+      // Todo: make sure it works
       else if(mode == 2){
          int index = -1;
-         scanf("%d",&index);
+         scanf("%d",&index); // add index out of bounds here
          getchar();
          char* word= inputWord();
          StrList_insertAt(list,word,index);
@@ -85,6 +92,7 @@ mode 0 = exit
          printf("%d",size);
       }
       // mode 5
+      // Todo: make sure it works
       else if(mode == 5){
          int index = -1;
          scanf("%d",&index);
@@ -103,7 +111,7 @@ mode 0 = exit
       }
       // mode 8
       else if(mode == 8){
-         char* word = inputWord(); // do i need to clear the char?
+         char* word = inputWord(); 
          StrList_remove(list,word);
       }
       // mode 9
@@ -117,6 +125,7 @@ mode 0 = exit
          StrList_reverse(list);
       }
       // mode 11
+      // Todo: make sure it works
       else if(mode == 11){
          StrList_free(list);
       }
@@ -126,7 +135,11 @@ mode 0 = exit
       }
       // mode 13
       else if(mode == 13){
-         printf("%d",StrList_isSorted(list)); 
+         if(StrList_isSorted(list)==1){
+            printf("True");
+         }
+         else
+         printf("False"); 
       }   
       // if the mode is 0 exit the loop
    }

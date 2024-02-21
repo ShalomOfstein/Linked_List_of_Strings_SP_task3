@@ -300,39 +300,34 @@ void StrList_reverse( StrList* StrList){
         StrList->_head = prev;
 }
 
+
 /*
  * Sort the given list in lexicographical order 
  */
 void StrList_sort( StrList* StrList){
     int swapped = 1;
-    StrListNode *ptr1;
-    StrListNode *ptr2 = NULL;
-    if(StrList->_head == NULL|| StrList->_head->_next == NULL){
+    StrListNode *curr;
+    StrListNode *done = NULL;
+    if(StrList == NULL || StrList->_head == NULL || StrList->_head->_next == NULL){
         return;
     }
     while(swapped){
         swapped = 0;
-        ptr1 = StrList->_head;
-        StrListNode* prev = NULL;
-        while(ptr1->_next != ptr2){
-            if(strcmp(ptr1->_data, ptr1->_next->_data) > 0){
-                StrListNode *temp = ptr1->_next;
-                ptr1->_next = temp->_next;
-                temp->_next = ptr1;
-                if(prev != NULL){
-                    prev->_next = temp;
-                }
-                else{
-                    StrList->_head = temp;
-                }
+        curr = StrList->_head;
+
+        while(curr->_next != done){
+            if(strcmp(curr->_data, curr->_next->_data) > 0){  
+                char* temp = curr->_next->_data;
+                curr->_next->_data = curr->_data;
+                curr->_data = temp;
+
                 swapped = 1;
             }
-            prev = ptr1;
-            ptr1 = ptr1->_next;
+            curr = curr->_next; 
         }
-        ptr2 = ptr1;
+        done = curr;
     }
-
+    
 }
 
 
