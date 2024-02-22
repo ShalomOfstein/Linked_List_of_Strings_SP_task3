@@ -10,7 +10,6 @@ it allocates memory for the word and returns it
 it allocates the memory dynamically
 */
 char* inputWord(){
-   
    char* word = (char*)malloc(sizeof(char));
    *word = '\0';
    char c = getchar(); // get the first character
@@ -28,6 +27,16 @@ char* inputWord(){
    }
 
    return word;  
+}
+
+
+/*
+this function is used to clear the words in the buffer until the new line character
+*/
+
+void clearLine(){
+   char c;
+   while((c=getchar())!='\n'&&c!=EOF);
 }
 
 
@@ -59,11 +68,12 @@ mode 0 = exit
 
    while(mode!=0){
       // get the mode
-      scanf("%d",&mode);
-      
-      if (mode<-1 || mode>13){
-         StrList_free(list);
+      if(scanf("%d",&mode)!=1){
          break;
+      }
+      if(mode<0||mode>13){
+         printf("Error: Invalid mode\n");
+         continue;
       }
 
       // mode 1 
@@ -71,8 +81,11 @@ mode 0 = exit
       if (mode == 1){
          
          int numOfWords = -1;
-         scanf("%d",&numOfWords);
-         getchar(); // to get rid of the new line character
+         if(scanf("%d",&numOfWords)!=1){
+            printf("Error: Invalid input\n");
+            break;
+         }
+         clearLine(); // to get rid of the new line character
          for(int i=0; i<numOfWords; i++){
             char* word = inputWord();
             StrList_insertLast(list,word);
@@ -82,8 +95,11 @@ mode 0 = exit
       // Todo: make sure it works
       else if(mode == 2){
          int index = -1;
-         scanf("%d",&index); // add index out of bounds here
-         getchar();
+         scanf("%d",&index);
+         if(index<0||index>StrList_size(list)){
+            continue;
+         }
+         clearLine();
          char* word= inputWord();
          StrList_insertAt(list,word,index);
       }
@@ -101,6 +117,10 @@ mode 0 = exit
       else if(mode == 5){
          int index = -1;
          scanf("%d",&index);
+         if(index<0||index>StrList_size(list)){
+            printf("Error: Index out of bounds\n");
+            continue;
+         }
          StrList_printAt(list,index);
       }
       // mode 6
@@ -109,13 +129,15 @@ mode 0 = exit
       }
       // mode 7
       else if(mode == 7){
-         getchar();
+         clearLine();
          char* word= inputWord(); // do i need to clear the char?
          int count = StrList_count(list,word);
          printf("%d\n",count);
+
       }
       // mode 8
       else if(mode == 8){
+         clearLine();
          char* word = inputWord(); 
          StrList_remove(list,word);
       }
@@ -152,5 +174,4 @@ mode 0 = exit
    }
    // before finishing the program free the list
    StrList_free(list);
-   
 }

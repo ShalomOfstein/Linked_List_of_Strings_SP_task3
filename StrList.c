@@ -115,19 +115,16 @@ void StrList_insertAt(StrList* StrList,
 	const char* data,int index){
     // if the index is out of bounds then do nothing
     if (index < 0 || index > StrList->_size) {
-        printf("Error: Index out of bounds\n");
         return;
     }
     // allocate a new node
     StrListNode* newNode= StrListNode_alloc(data,NULL);
     // if there is no new memory to allocate
     if(newNode==NULL){
-        printf("Error: Memory allocation failed\n");
         return;
     }// if the list is empty then the new node is the head
     if (StrList->_head==NULL) {
         StrList->_head= newNode;
-        printf("The list is empty, word added to head\n");
     }
     else {
         // find the node before the index
@@ -156,10 +153,11 @@ char* StrList_firstData(const StrList* StrList){
 void StrList_print(const StrList* StrList){
     StrListNode* p= StrList->_head;
     if(p==NULL){
+        printf("\n");
         return;
     }
     while(p->_next) {
-        printf("%s ",p->_data); // is this right????????????????????????????????????????????????????
+        printf("%s ",p->_data); 
         p= p->_next;
     }
     printf("%s",p->_data);
@@ -175,7 +173,7 @@ void StrList_printAt(const StrList* Strlist,int index){
     for(int i=0;i<index;i++){
         p= p->_next;
     }
-    printf("%s\n",p->_data); // is this right????????????????????????????????????????????????????
+    printf("%s\n",p->_data); 
 }
 
 /*
