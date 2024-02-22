@@ -18,6 +18,10 @@ typedef struct _StrListNode {
 // Allocates memory for a new StrListNode.
 StrListNode* StrListNode_alloc(const char* data, StrListNode* next) {
     StrListNode* p= (StrListNode*)malloc(sizeof(StrListNode));
+    if (p==NULL) {
+        printf("Memory allocation failed in StrListNode_alloc\n");
+        return NULL;
+    }
     p->_data= strdup(data);
     p->_next= next;
     return p;
@@ -47,6 +51,10 @@ typedef struct _StrList {
  */
 StrList* StrList_alloc(){
     StrList* p= (StrList*)malloc(sizeof(StrList));
+    if (p==NULL) {
+        printf("Memory allocation failed in StrList_alloc\n");
+        return NULL;
+    }
     p->_head= NULL;
     p->_size= 0;
     return p;
@@ -147,6 +155,9 @@ char* StrList_firstData(const StrList* StrList){
  */
 void StrList_print(const StrList* StrList){
     StrListNode* p= StrList->_head;
+    if(p==NULL){
+        return;
+    }
     while(p->_next) {
         printf("%s ",p->_data); // is this right????????????????????????????????????????????????????
         p= p->_next;

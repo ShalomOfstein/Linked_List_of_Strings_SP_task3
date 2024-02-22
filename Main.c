@@ -17,6 +17,11 @@ char* inputWord(){
    while(c!=' '&&c!='\n'&&c!=EOF){
       int len = strlen(word); 
       word = (char*)realloc(word,len+2);  // allocate memory for the new character
+      if (word == NULL) {
+         // Handle memory allocation failure
+         printf("Memory allocation failed in input word\n");
+         exit(EXIT_FAILURE);
+      }
       word[len] = c;                      // add the character to the word
       word[len+1] = '\0';                 // add the null terminator
       c = getchar();                      // get the next character
@@ -127,7 +132,9 @@ mode 0 = exit
       // mode 11
       // Todo: make sure it works
       else if(mode == 11){
-         StrList_free(list);
+         while(StrList_size(list)){
+            StrList_removeAt(list,0);
+         }
       }
       // mode 12
       else if(mode == 12){
