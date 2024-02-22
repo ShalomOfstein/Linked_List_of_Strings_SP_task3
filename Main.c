@@ -77,7 +77,7 @@ mode 0 = exit
       }
 
       // mode 1 
-   
+      // takes the number of words and then the words and add them to the list
       if (mode == 1){
          
          int numOfWords = -1;
@@ -92,7 +92,7 @@ mode 0 = exit
          }
       }
       // mode 2
-      // Todo: make sure it works
+      // insert a word at a specific index
       else if(mode == 2){
          int index = -1;
          scanf("%d",&index);
@@ -103,17 +103,22 @@ mode 0 = exit
          char* word= inputWord();
          StrList_insertAt(list,word,index);
       }
+
       // mode 3
+      // print the list
       else if(mode == 3){
          StrList_print(list);
       }
+
       // mode 4
+      // print the size of the list
       else if(mode == 4){
          int size = StrList_size(list);
          printf("%d\n",size);
       }
+
       // mode 5
-      // Todo: make sure it works
+      // print the word at a specific index
       else if(mode == 5){
          int index = -1;
          scanf("%d",&index);
@@ -123,46 +128,61 @@ mode 0 = exit
          }
          StrList_printAt(list,index);
       }
+
       // mode 6
+      // print the length of chars in the list
       else if(mode == 6){
          printf("%d\n" ,StrList_printLen(list)); 
       }
+
       // mode 7
+      // count the number of times a word exists in the list
       else if(mode == 7){
          clearLine();
-         char* word= inputWord(); // do i need to clear the char?
+         char* word= inputWord();
          int count = StrList_count(list,word);
          printf("%d\n",count);
 
       }
+
       // mode 8
+      // remove a word from the list
       else if(mode == 8){
          clearLine();
          char* word = inputWord(); 
          StrList_remove(list,word);
       }
+
       // mode 9
+      // remove a word at a specific index
       else if(mode == 9){
          int index = -1;
          scanf("%d",&index);
          StrList_removeAt(list,index);
       }
+
       // mode 10
+      // reverse the list
       else if(mode == 10){
          StrList_reverse(list);
       }
+
       // mode 11
-      // Todo: make sure it works
+      // remove all the words from the list
       else if(mode == 11){
          while(StrList_size(list)){
             StrList_removeAt(list,0);
          }
       }
+
       // mode 12
+      // sort the list
       else if(mode == 12){
-         StrList_sort(list); //Todo: segmenation fault core dumped
+         StrList_sort(list); 
       }
+
       // mode 13
+      // check if the list is sorted
       else if(mode == 13){
          if(StrList_isSorted(list)==1){
             printf("true\n");
