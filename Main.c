@@ -97,6 +97,7 @@ mode 0 = exit
          int index = -1;
          scanf("%d",&index);
          if(index<0||index>StrList_size(list)){
+            printf("Error: Index out of bounds\n");
             continue;
          }
          clearLine();
