@@ -127,14 +127,21 @@ void StrList_insertAt(StrList* StrList,
         StrList->_head= newNode;
     }
     else {
-        // find the node before the index
-        StrListNode* q= StrList->_head;
-        for(int i=0;i<index-1;i++){
-            q= q->_next;
+        if(index==0){
+            // if the index is 0 then the new node is the new head
+            newNode->_next= StrList->_head;
+            StrList->_head= newNode;
         }
-        // add the new node to the list
-        newNode->_next= q->_next;
-        q->_next= newNode;
+        else{
+            // find the node before the index
+            StrListNode* q= StrList->_head;
+            for(int i=0;i<index-1;i++){
+                q= q->_next;
+            }
+            // add the new node to the list
+            newNode->_next= q->_next;
+            q->_next= newNode;
+        }
     }
     // increase the size of the list
     StrList->_size++;
@@ -215,14 +222,15 @@ void StrList_remove(StrList* StrList, const char* data){
         if (strcmp(p->_data,data)==0) {
             if(q==NULL){
                 StrList->_head= p->_next;
+                StrListNode_free(p);
+                p= StrList->_head;
             }
             else{
                 q->_next= p->_next;
+                StrListNode_free(p);
+                p= q->_next;
             }
-            
-            StrListNode_free(p);
             StrList->_size--;
-            p=q->_next;
         }
         else{
             q= p;
